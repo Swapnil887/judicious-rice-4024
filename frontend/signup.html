@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Authentication</title>
+    <link rel="stylesheet" href="./css/signup.css">
+</head>
+
+<body>
+    <div style="display: flex;justify-content: center;align-items: center;">
+        <div style="width: 80%;padding-left: 10%;">
+            <div style="padding-right: 20%;">
+                <h2 id="account" style="color: red;cursor: pointer;">Create Account</h2>
+            </div>
+            <div>
+                <a class="google-sign-in" href="http://localhost:8080/user/auth/google"><span class="icon"></span><span
+                        class="buttonText">Sign in
+                        with Google</span></a>
+
+            </div>
+            <div class="f">
+                <form>
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Username" size="48" required>
+                    <br>
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Email Address" size="48" required>
+                    <br>
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Password" size="48" required>
+                    <br>
+                    <label>Confirm Password</label>
+                    <input type="password" id="confirm" placeholder="Confirm Password" size="48" required>
+
+                </form>
+                
+            </div>
+            <div id="lastt" style="padding-right: 25%;">
+                <button id="last">
+                    <h3 id="h3" style="margin: 0px;">Sign Up</h3>
+                </button>
+            </div>
+
+        </div>
+        <div>
+            <img style="width: 50%;padding-left: 20%;"
+                src="https://static.hsappstatic.net/signup-ui-lego/static-1.8137/images/landing-page-headshot/landing-page-headshot@3x.png"
+                alt="">
+        </div>
+    </div>
+
+</body>
+    <script>
+        let email = document.getElementById('email')
+        let password = document.getElementById('password')
+        let confirm = document.getElementById('confirm')
+        let username = document.getElementById("username")
+        let last = document.getElementById('last')
+        let account = document.getElementById('account')
+        let gsign = document.querySelector('.google-sign-in')
+        
+        account.addEventListener("click", () => {
+            window.location.href = "./index.html"
+        })
+
+        last.addEventListener('click', () => {
+            let data = {
+                name: username.value,
+                email: email.value,
+                password: password.value,
+                role: "client"
+            }
+
+            fetch("http://localhost:8080/user/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    console.log(res);
+                    if (res === "exists") alert("Already exists")
+                    else if(res=="Invalid Email"){
+                        
+                        alert("Invalid Email")
+                    }else{
+                        alert("Registered Successfully")
+                        
+                        window.location.href = "./index.html"
+                    }
+                })
+                .catch(err => console.log(err))
+        });
+    </script>
+
+</html>
