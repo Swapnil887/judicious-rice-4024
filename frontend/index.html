@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-Page</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nav.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    
+
+    <nav class="navbar">
+
+        <div class="nav-searchbar">
+            <div id="logo">
+                <img src="https://github.com/Pujansharma/Brookstone/assets/113420172/39500a7c-23a2-4568-ae1f-0a016d05c8e0"
+                    id="logo-image">
+            </div>
+            <div class="search">
+                <input type="text" id="search-input" placeholder="Search">
+
+            </div>
+            <div class="icon-search">
+                <!-- <img src="" > -->
+                <img id="search-icon" src="https://cdn-icons-png.flaticon.com/512/482/482631.png" alt="searchicon">
+            </div>
+            <div class="cart-login">
+
+                <button id="btn_login">Login</button>
+            </div>
+        </div>
+        <div class="dropdowndiv">
+        <div class="drop-downs">
+            <p id="Massage" onmouseover={MassagePopup()} onmouseleave={Massageleave()}>Find a lawer</p>
+            <p id="Wellness" onmouseover={WellnessPopup()} onmouseleave="{Wellnessleave()}">Legal Advice</p>
+            <p id="Sleep" onmouseover={SleepPopup()} onmouseleave="{Sleepleave()}">Legal Services</p>
+            <p id="Home" onmouseover={SleepPopup()} onmouseleave="{Sleepleave()}">About</p>
+            <!-- <p>Home</p> -->
+            <p>Wine & Bar</p>
+            <p>Outdoor</p>
+            <p>Technology</p>
+        </div>
+        </div>
+    </nav>
+
+    <!-- *****************************************DROP-DOWNS-CONTAINERS************************************************* -->
+    <!-- ///////////Massage//////////////// -->
+
+    <div class="massage-dropdown hidden">
+        <div class="list1">
+            <div id="massage-chairs">
+                <p>Massage Chairs</p>
+                <p>Eye</p>
+                <p>Foot & Leg</p>
+            </div>
+            <div id="massage-guns">
+                <p>Massage Guns</p>
+                <p>Hand</p>
+                <p>Intimate</p>
+            </div>
+            <div id="neck-back">
+                <p>Neck & Back</p>
+                <p>Rollers</p>
+                <p>Seat Topper</p>
+            </div>
+            <div id="best-sellers">
+                <p>Best Sellers</p>
+                <p>Viel All</p>
+            </div>
+        </div>
+        <div class="list2">
+            <div id="massagechair-image-div">
+                
+                <p>Massage Chair Guide</p>
+            </div>
+            <div id="foot-image-div">
+                
+                <p>Foot & Leg Massage</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- //////WELLNESS//////////////// -->
+
+    <div class="wellness-dropdown hidden">
+        <div class="list1">
+            <div id="massage-chairs">
+                <p>Bath</p>
+                <p>Cold & Heat Therapy</p>
+                <p>Comfort</p>
+                <p>Cleansers</p>
+            </div>
+            <div id="massage-guns">
+                <p>Cupping</p>
+                <p>Eye Care</p>
+                <p>Grooming</p>
+                <p>Hair Care</p>
+            </div>
+            <div id="neck-back">
+                <p>LED</p>
+                <p>Meditation</p>
+                <p>Skin Care</p>
+                <p>Sound Machines</p>
+            </div>
+            <div id="best-sellers">
+                <p>Best Sellers</p>
+                <p>Viel All</p>
+            </div>
+        </div>
+        <div class="list2">
+            <div id="massagechair-image-div">
+                
+                <p>Bath</p>
+            </div>
+            <div id="foot-image-div">
+                
+                <p>Skin Care</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ///////////////SLEEP////////////////// -->
+
+    <div class="sleep-dropdown hidden">
+        <div class="list1">
+            <div id="massage-chairs">
+                <p>Air Quality</p>
+                <p>Alarms</p>
+                <p>Bedding</p>
+            </div>
+            <div id="massage-guns">
+                <p>Clocks</p>
+                <p>Comforts</p>
+                <p>Mattress</p>
+            </div>
+            <div id="neck-back">
+                <p>Pillows</p>
+                <p>Intimate Pillows</p>
+                <p>Sound Machines</p>
+            </div>
+            <div id="best-sellers">
+                <p>View All</p>
+            </div>
+        </div>
+        <div class="list2">
+            <div id="massagechair-image-div">
+                
+                <p>Pillows</p>
+            </div>
+            <div id="foot-image-div">
+              
+                <p>Sound Machines</p>
+            </div>
+        </div>
+    </div>
+
+         ------------ <!-- //Footerr------------------------ -->
+
+    <!--footer-->
+    <footer class="padding_4x">
+        <div class="flex">
+            <section class="flex-content padding_1x">
+                <h3>About</h3>
+                <a href="#">Zoom Blog</a>
+                <a href="#">Customers</a>
+                <a href="#">Our Team</a>
+                <a href="#">Careers</a>
+                <a href="#">Integrations</a>
+                <a href="#">Partners</a>
+                <a href="#">Investors</a>
+                <a href="#">LawerVentures</a>
+                <a href="#">Developer</a>
+
+            </section>
+            <section class="flex-content padding_1x">
+                <h3>Download</h3>
+                <a href="#">Meetings Client</a>
+                <a href="#">Zoom Rooms Client</a>
+                <a href="#">Zoom Rooms Controller</a>
+                <a href="#">Browser Extension</a>
+                <a href="#">Outlook Plug-in</a>
+                <a href="#">iPhone/iPad App</a>
+                <a href="#">Android App</a>
+                <a href="#">Zoom Virtual Backgrounds</a>
+            </section>
+            <section class="flex-content padding_1x">
+                <h3>Sales
+                </h3>
+                <a href="#">1.888.799.9666</a>
+                <a href="#">Contact Sales</a>
+                <a href="#">Plans & Pricing</a>
+                <a href="#">Request a Demo</a>
+                <a href="#">Webinars and Events</a>
+            </section>
+            <section class="flex-content padding_1x">
+                <h3>Support
+                </h3>
+                <a href="#">Test Lawer</a>
+                <a href="#">Account</a>
+                <a href="#">Support Center</a>
+                <a href="#">Learning Center</a>
+                <a href="#">Feedback</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Developer Support</a>
+                <a href="#">Legal Policies</a>
+            </section>
+            <section class="flex-content padding_1x">
+                <h3>Newsletter</h3>
+                <p>You can trust us. we only send promo offers,</p>
+                <fieldset class="fixed_flex">
+                    <input type="email" name="newsletter" placeholder="Your Email Address">
+                    <button class="btn btn_2">Subscribe</button>
+                </fieldset>
+            </section>
+        </div>
+        <div class="flex">
+            <section class="flex-content padding_1x">
+                <p>Copyright ©2023 All rights reserved || Lawer- Let's connect</p>
+            </section>
+            <section class="flex-content padding_1x">
+                <a href="https://www.facebook.com/zoom"><i class="fa fa-facebook"></i></a>
+                <a href="https://twitter.com/zoom"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.instagram.com/zoom/"><i class="fa fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/company/zoom-video-communications/"><i class="fa fa-linkedin"></i></a>
+            </section>
+        </div>
+    </footer>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
+<script>
+    let logo = document.querySelector("#logo-image");
+  logo.addEventListener("click", () => {
+    window.location.href = "index.html"
+  })
+    $('#slick1').slick({
+        rows: 1,
+        dots: false,
+        arrows: false,
+        autoplay: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
+    $('#featureSlide').slick({
+        rows: 1,
+        dots: false,
+        arrows: false,
+        autoplay: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    });
+
+
+    $('.best-sellers-slider').slick({
+        rows: 1,
+        dots: false,
+        arrows: false,
+        autoplay: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 3
+    });
+    
+    
+        
+
+
+</script>
+<script src="nav.js"></script>
+
+</html>
