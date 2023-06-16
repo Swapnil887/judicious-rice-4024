@@ -1,0 +1,65 @@
+
+    /* CSS styles for demonstration purposes */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #4CAF50;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .search-form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .search-form input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    .search-form select {
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    .search-form input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .search-results {
+      margin-top: 20px;
+    }
+    
+    .search-results ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .search-results li {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .search-results li h2 {
+      margin: 0;
+    }
+    
+    .search-results li p {
+      margin: 0;
+    }
