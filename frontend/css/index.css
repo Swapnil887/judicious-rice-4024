@@ -1,128 +1,13 @@
-.main-body{
+/* .main-body{
     width: 100%;
     display: flex;
     margin-bottom: 3%;
-}
-.wakeup-slider{
-    padding-top: 8%;
-    z-index: -1;
- 
-    /* border: 1px solid red; */
-    width: 60%;
-}
-.wakeup-slider img{
-    margin-top: 0.7%;
-    cursor: pointer;
-    width: 100%;
-}
-.image-grid{
-    padding-top: 8%;
-    display: grid;
-    padding-left: 1%;
-    column-gap: 2%;
-    grid-template-columns: repeat(2,1fr);
-    /* border: 1px solid blue; */
-    width: 40%;
-}
-.image-grid img{
-    width: 100%;
-}
-.item1{
-    grid-column-start: 1;
-    grid-column-end: 3;
-   
-}
-.image-grid{
-    margin-top: 1%;
-}
+} */
 
-/* *********************************************FEATURED BRANDS*********************************/
-
-#featured-brands-heading{
-    letter-spacing: 8px;
-    text-align: center;
-    font-size: 150%;
-    margin-top: 3%;
-    margin-bottom: 5%;
-}
-
-.featured-slider img{
-width: 90%;
-margin-left: 4%;
-border-radius: 8%;
-margin-bottom: 20%;
-}
-
-
-/* *****************************************BEST SELLER*************************************** */
-
-#best-seller-heading{
-    letter-spacing: 8px;
-    text-align: center;
-    font-size: 150%;
-    margin-top: 3%;
-    margin-bottom: 5%;
-}
-
-.best-sellers-slider img{
-    width: 90%;
-    margin-left: 10%;
-}
-
-.best-sellers-slider, .featured-slider{
-    z-index: -1;
-}
-
-.best-div{
-    text-align: center;
-}
-
-/* ***********************FEATURED CATOGERIES*************************** */
-
-#catogeries-heading{
-letter-spacing: 8px;
-text-align: center;
-font-size: 150%;
-margin-top: 3%;
-margin-bottom: 5%;
-}
-
-.catogeries-card1{
-    display: flex;
-    text-align: center;
-    margin-bottom: 5%;
-}
-
-.catogeries-card2{
-    display: flex;
-    text-align: center;
-    margin-bottom: 5%;
-}
-
-.catogeries-card1 img{
-width: 80%;
-}
-
-.catogeries-card2 img{
-    width: 80%;
-}
 
 /* *******************************shop the guide**************************** */
 
 
-.shop-the-guide{
-    width: 90%;
-    margin-left: 6%;
-    display: flex;
-    margin-bottom: 8%;
-}
-
-.shop-the-guide img{
-    width: 100%;
-}#logo-image{
-    cursor: pointer;
-  }
-  
 
 /* ******************************FOOTER*************************** */
 
@@ -316,7 +201,7 @@ margin: 5% auto;
     }
     
     a, button{
-        transition:0.5s;
+        /* transition:0.5s; */
     }
     
     /* a, p{
@@ -329,7 +214,7 @@ margin: 5% auto;
     }
     
     a, button, input, textarea, select{
-        outline:none !important;
+        /* outline:none !important; */
     }
     
     fieldset{
@@ -514,4 +399,75 @@ margin: 5% auto;
     }
     footer{
         padding-top: 200px;
+    }#crad_1{
+        padding-top: 250px;
+        margin-left: 50px;
+        display: flex;
+        justify-content: space-evenly;
+    }.card_2{
+        display: flex;
+        justify-content: space-evenly;
+        
+        cursor: pointer;
+    }.drop-downs{
+        justify-content: space-evenly;
+        margin-left: 250px;
+    } #top{
+        display: flex;
+        /* justify-content: space-around; */
+        margin-right: 140px;
+         gap: 20px; 
+    }.drop-downs{
+        display: flex;
+        justify-content: space-around;
+        /* margin-right: 140px; */
+        gap: 0px;
+    }#btn{
+        width: 10rem;
+        height: 40px;
+        background: #022b50;
+        cursor: pointer;
+        color: #fff;
+        font-size: 14px;
+        border: 1px solid #022b50;
+        white-space: nowrap;
+    }#border{
+        /* padding-top: 0;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        background: 0;
+        border: 1px;
+        width: 60%;
+        height: 250px; */
+        border: 1px solid red;
+        width: 60%;
+        height: 250px;
+        margin: auto;
+        margin-top: 205px;
+    }.card_2 img{
+        border-radius: 50%;
+        height: 45%;
+        width: 70%;
+       /* align-items: center; */
+       /* text-align: center; */
+    }.card_2 img{
+        /* align-items: center; */
+        /* margin-left: 20px; */
+        margin: auto;
+    } .container_top_lawer {
+        /* padding-bottom: 5px; */
+        padding-top: 125px;
+        font-weight: 300;
+        margin-left: 505px;
+    line-height: 36px;
+    color: #000;
+     display: block; 
+     font-weight: bold;
+    font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+    background: #fff;
+    }#btn{
+        background-color: #4c50e0;;
+        height: 50px;
+        font-weight: bold;
     }
+      
