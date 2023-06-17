@@ -16,13 +16,14 @@ const schema = mongoose.Schema(
         },
         role: {
             type: String,
-            required: true
+            default: 'client'
         },
-        appointment:{
-            type:Object
+        appointment: {
+            type: Object
         },
-        status:{
-            type:Boolean
+        status: {
+            type: Boolean,
+            default: false
         }
     }
 

@@ -12,14 +12,17 @@
 </body>
 <script>
     // Extract the user data from the URL query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const encodedData = urlParams.get('user');
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get('user');
 
-// Decode the URL-safe string and parse it back into an object
-const userData = JSON.parse(decodeURIComponent(encodedData));
+    // Decode the URL-safe string and parse it back into an object
+    const userData = JSON.parse(decodeURIComponent(encodedData));
 
-// Access the user properties as needed
-console.log(userData);
+    // Access the user properties as needed
+    console.log(userData);
+    localStorage.clear()
+    localStorage.setItem("user", JSON.stringify(userData))
+
 
 
 </script>
