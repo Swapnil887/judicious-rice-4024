@@ -1,0 +1,167 @@
+/* Reset some default styles */
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+p,
+button,
+input {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.lawyer-details h2,
+.payment-details h2 {
+  margin-bottom: 20px;
+}
+
+.lawyer-card {
+  display: flex;
+  align-items: center;
+}
+
+.lawyer-avatar {
+  flex: 0 0 100px;
+  margin-right: 20px;
+}
+
+.lawyer-avatar img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.lawyer-info h3 {
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.loading-message {
+  margin-top: 10px;
+  font-style: italic;
+  color: #999;
+}
+
+.success-message {
+  margin-top: 10px;
+  color: green;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Styles for screens larger than 768px */
+@media screen and (min-width: 768px) {
+    body {
+      padding: 40px;
+    }
+  
+    main {
+      margin-top: 40px;
+    }
+  
+    .lawyer-card {
+      flex-direction: row;
+    }
+  
+    .lawyer-avatar {
+      flex: 0 0 200px;
+      margin-right: 40px;
+    }
+  
+    .form-group {
+      display: flex;
+      align-items: center;
+    }
+  
+    label {
+      width: 120px;
+    }
+  
+    input[type="submit"] {
+      padding: 12px 24px;
+    }
+  }
+  
+  /* Styles for screens smaller than 768px */
+  @media screen and (max-width: 767px) {
+    header h1 {
+      font-size: 20px;
+    }
+  
+    main {
+      margin-top: 20px;
+    }
+  
+    .lawyer-card {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .lawyer-avatar {
+      margin-bottom: 20px;
+    }
+  
+    .form-group label {
+      width: 100%;
+    }
+  
+    input[type="submit"] {
+      width: 100%;
+    }
+  }
+  
