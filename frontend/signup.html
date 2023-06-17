@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Authentication</title>
     <link rel="stylesheet" href="./css/signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"
+        integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css"
+        integrity="sha256-7jUS+MWeqkFdmW9ozkZ7mPagz+QmMbsBlt+Q3MsE+FU=" crossorigin="anonymous">
 </head>
 
 <body>
@@ -36,7 +40,7 @@
                     <input type="password" id="confirm" placeholder="Confirm Password" size="48" required>
 
                 </form>
-                
+
             </div>
             <div id="lastt" style="padding-right: 25%;">
                 <button id="last">
@@ -53,20 +57,38 @@
     </div>
 
 </body>
-    <script>
-        let email = document.getElementById('email')
-        let password = document.getElementById('password')
-        let confirm = document.getElementById('confirm')
-        let username = document.getElementById("username")
-        let last = document.getElementById('last')
-        let account = document.getElementById('account')
-        let gsign = document.querySelector('.google-sign-in')
-        
-        account.addEventListener("click", () => {
-            window.location.href = "./index.html"
-        })
+<script>
+    let email = document.getElementById('email')
+    let password = document.getElementById('password')
+    let confirm = document.getElementById('confirm')
+    let username = document.getElementById("username")
+    let last = document.getElementById('last')
+    let account = document.getElementById('account')
+    let gsign = document.querySelector('.google-sign-in')
 
-        last.addEventListener('click', () => {
+    account.addEventListener("click", () => {
+        window.location.href = "./index.html"
+    })
+
+    last.addEventListener('click', () => {
+        if (password.value != confirm.value) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Both Password Are Not Same',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+
+        }else if(username.value==''&&password.value==''&&email.value==''){
+            Swal.fire({
+                title: 'Error!',
+                text: 'Fill All The Required Fields',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        }
+        else {
+
             let data = {
                 name: username.value,
                 email: email.value,
@@ -84,18 +106,32 @@
                 .then(res => res.json())
                 .then((res) => {
                     console.log(res);
-                    if (res === "exists") alert("Already exists")
-                    else if(res=="Invalid Email"){
-                        
-                        alert("Invalid Email")
-                    }else{
-                        alert("Registered Successfully")
-                        
-                        window.location.href = "./index.html"
+                    if (res === "exists") {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Email Already Exists',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        })
+                    }
+                    else if (res == "Invalid Email") {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Invalid Email',
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        })
+                    } else {
+                        Swal.fire(
+                            'Good job!',
+                            'Email Confirmation Sent!',
+                            'success'
+                        )
                     }
                 })
                 .catch(err => console.log(err))
-        });
-    </script>
+        }
+    });
+</script>
 
 </html>

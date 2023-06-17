@@ -6,10 +6,11 @@ const nodemailer = require('nodemailer');
 const handlebars = require('handlebars')
 const bcrypt = require('bcrypt');
 const fs = require('fs')
-const userrouter=express.Router()
+const userrouter = express.Router()
 
 const cors = require('cors');
 const { usermodel } = require('../models/usermodel');
+const { outhuser } = require('../models/outh');
 userrouter.use(cors());
 
 // Set up your GoogleStrategy here
@@ -38,20 +39,98 @@ userrouter.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
+userrouter.post('/forgotpassword', (req, res) => {
+  let { email } = req.body
+  console.log(email);
+  const directory = path.join(__dirname, "..", "verifypassword.html");
+  const fileRead = fs.readFileSync(directory, "utf-8");
+  const template = handlebars.compile(fileRead);
+  const htmlToSend = template({ email });
+  let mailOptions = {
+    from: process.env.USER_EMAIL,
+    to: email,
+    subject: "Verify Account",
+    html: htmlToSend,
+  };
+  transporter.sendMail(mailOptions, async (err, info) => {
+    if (err) {
+      console.log(err);
+      res.json("Invalid Email")
+    } else {
+      console.log(info);
+      res.json("Email Sent")
+    }
+  });
+});
+
+userrouter.get("/newpasswordreset/:email", async (req, res) => {
+  let email = req.params.email
+  console.log(email);
+
+  const userData = JSON.stringify(email);
+
+  // Encode the serialized JSON as a URL-safe string
+  const encodedData = encodeURIComponent(userData);
+
+  res.redirect(`http://127.0.0.1:5500/frontend/confirmpassword.html?user=${encodedData}`);
+})
+
+userrouter.post("/confirmpassword", async (req, res) => {
+  let { email, password } = req.body
+  if (email && password) {
+    let user = await usermodel.findOne({ email })
+    console.log(user);
+    if (user == null) res.json("Not Found")
+    else {
+      let hash = bcrypt.hashSync(password, 10)
+      await usermodel.findOneAndUpdate({ email }, { password: hash })
+      res.json("Reset Successful")
+    }
+  } else {
+    res.json("error in resseting")
+  }
+})
+
+userrouter.get('/status/:email', async (req, res) => {
+  let email = req.params.email
+  console.log(email);
+  await usermodel.findOneAndUpdate({ email }, { status: true })
+  const userData = JSON.stringify(email);
+
+  // Encode the serialized JSON as a URL-safe string
+  const encodedData = encodeURIComponent(userData);
+
+  res.redirect(`http://127.0.0.1:5500/frontend/login.html?user=${encodedData}`)
+});
+
 userrouter.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 userrouter.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login', session: false }),
-  function (req, res) {
+  async function (req, res) {
     // Successful authentication, send user's data to the frontend
-    const userData = JSON.stringify(req.user);
+    let email = req.user._json.email
+    let user = await outhuser.findOne({ email })
+    if (user != null) {
+      const userData = JSON.stringify(user);
 
-    // Encode the serialized JSON as a URL-safe string
-    const encodedData = encodeURIComponent(userData);
+      // Encode the serialized JSON as a URL-safe string
+      const encodedData = encodeURIComponent(userData);
 
-    res.redirect(`http://127.0.0.1:5500/frontend/userdetails.html?user=${encodedData}`);
+      res.redirect(`http://127.0.0.1:5500/frontend/userdetails.html?user=${encodedData}`);
 
+    } else {
+      let obj = {
+        email
+      }
+      let user = new outhuser(obj)
+      await user.save()
+      let userfromdb = await outhuser.findOne({ email })
+      const userData = JSON.stringify(userfromdb);
+      const encodedData = encodeURIComponent(userData);
+      res.redirect(`http://127.0.0.1:5500/frontend/userdetails.html?user=${encodedData}`);
+    }
   }
 );
 
@@ -69,11 +148,11 @@ const transporter = nodemailer.createTransport({
 
 userrouter.post('/signup', async (req, res) => {
   console.log(req.body);
-  let { name, email, password, role } = req.body
+  let { name, email, password } = req.body
   let userexists = await usermodel.findOne({ email })
 
   if (userexists !== null) res.json("exists");
-  else{
+  else {
     const directory = path.join(__dirname, "..", "verify.html");
     console.log(directory)
     const fileRead = fs.readFileSync(directory, "utf-8");
@@ -95,9 +174,7 @@ userrouter.post('/signup', async (req, res) => {
         let obj = {
           name,
           email,
-          password: hash,
-          role: "client",
-          status: false
+          password: hash
         }
         let user = new usermodel(obj)
         await user.save()
@@ -106,6 +183,22 @@ userrouter.post('/signup', async (req, res) => {
     });
   }
 });
-module.exports={
-    userrouter
+
+userrouter.post("/login", async (req, res) => {
+  let { email, password } = req.body
+  let user = await usermodel.findOne({ email })
+  if (user == null) res.json("NotFound")
+  else if (user.status == false) res.json("Confirm your Account")
+  else {
+    let hash = bcrypt.compareSync(password, user.password)
+    if (hash) {
+      res.json(user)
+    } else {
+      res.json("Incorrect Password")
+    }
+  }
+})
+
+module.exports = {
+  userrouter
 }
