@@ -345,7 +345,12 @@ article {
  height: 50px;
 }
 
-
+.innerb{
+  background-color: #0078db;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: whitesmoke;
+}
 
 #gap{
   height: 80px;
@@ -412,7 +417,7 @@ article {
 
     #div2{
       margin-left: auto;
-      border: 1px solid green;
+      /* border: 1px solid green; */
     }
 
     .search-results ul {

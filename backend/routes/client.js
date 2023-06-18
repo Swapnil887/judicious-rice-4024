@@ -4,22 +4,23 @@ const mongoose = require("mongoose");
 const express = require("express");
 const { LawyerModel } = require("../models/lawyerModel");
 const { usermodel } = require("../models/usermodel");
+const { lawyerRoute } = require("./Lawyers");
 // const { LawyerModel } = require("../models/lawyerModel");
 
 
 const clientRoute = express()
 
 
-clientRoute.get("/user",async(req,res)=>{
-  const {email} = req.query
+clientRoute.get("/user", async (req, res) => {
+  const { email } = req.query
   try {
-    var data =  await usermodel.findOne({email})
-    res.json(data)  
+    var data = await usermodel.findOne({ email })
+    res.json(data)
   } catch (error) {
     console.log(error)
     res.json("something went wrong while getting user profile")
   }
-    
+
 })
 
 
@@ -80,9 +81,9 @@ clientRoute.get("/book", async (req, res) => {
 
     if (obj == undefined) {
       var newObj = {}
-      newObj[bookingsloat] = l.name
+      newObj[bookingsloat] = l
     } else {
-      obj[bookingsloat] = l.name
+      obj[bookingsloat] = l
       var newObj = { ...obj }
     }
 
@@ -110,6 +111,66 @@ clientRoute.get("/book", async (req, res) => {
   }
 })
 
+clientRoute.get("/cancle",async(req,res)=>{
+  try {
+    const {time,email,lawyer_id} = req.query
+    console.log(lawyer_id,time,email)
+    const f = await LawyerModel.findOne({_id:lawyer_id})
+    
+
+    var booking_slot =  {...f.sloats}
+    booking_slot[time] = "not booked"
+    
+    // console.log(booking_slot)
+
+
+    // console.log(booking)
+
+    await LawyerModel.updateOne({_id:lawyer_id},{sloats:booking_slot})
+    var x = await usermodel.find({ email: email })
+    var user_appointment = {...x[0].appointment}
+    console.log(user_appointment)
+    delete user_appointment[time]
+    console.log("ffffff",user_appointment)
+    var y = await usermodel.updateOne({email:email},{appointment:user_appointment})
+    console.log(y)
+    res.json("appoinment cancled")
+  } catch (error) {
+    console.log(error)
+    res.json("something went wrong in canciling")
+
+  }
+})
+
+async function x(time,email,lawyer_id) {
+  try {
+    
+
+    const f = await LawyerModel.findOne({_id:lawyer_id})
+    
+
+    var booking_slot =  {...f.sloats}
+    booking_slot[time] = "not booked"
+    
+    // console.log(booking_slot)
+
+
+    // console.log(booking)
+
+    await LawyerModel.updateOne({_id:booking._id},{sloats:booking_slot})
+    var x = await usermodel.find({ email: email })
+    var user_appointment = {...x[0].appointment}
+    console.log(user_appointment)
+    delete user_appointment[time]
+    console.log("ffffff",user_appointment)
+    var y = await usermodel.updateOne({email:email},{appointment:user_appointment})
+    console.log(y)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 module.exports = { clientRoute }
 
@@ -119,12 +180,13 @@ module.exports = { clientRoute }
 
 
 
-async function fun() {
-  var x = await usermodel.find();
-  console.log(x)
-}
+// async function fun() {
+//   var x = await usermodel.deleteOne({ email: "ssinghsolanki686@gmail.com" });
+//   console.log(x)
+// }
 
-fun()
+// fun()
+
 
 
 

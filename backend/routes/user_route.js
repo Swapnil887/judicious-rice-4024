@@ -100,7 +100,7 @@ userrouter.get('/status/:email', async (req, res) => {
   // Encode the serialized JSON as a URL-safe string
   const encodedData = encodeURIComponent(userData);
 
-  res.redirect(`http://127.0.0.1:5500/frontend/login.html?user=${encodedData}`)
+  res.redirect(`http://127.0.0.1:5501/frontend/login.html?user=${encodedData}`)
 });
 
 userrouter.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

@@ -8,7 +8,8 @@ const lawyerSchema = mongoose.Schema(
         "location": String,
         "contact": {
           "phone": String,
-          "email": String
+          "email": String,
+          "password":String
         },
         "image": String,
         "rating": Number,

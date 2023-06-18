@@ -7,41 +7,98 @@ function updateProfile(profileData) {
   appointmentTable.innerHTML = ""; // Clear previous content
 
   for (const time in appointmentData) {
-      const booking = appointmentData[time];
-      const row = document.createElement("div");
-      const timeCell = document.createElement("span");
-      const bookingCell = document.createElement("span");
-      const cancelButton = document.createElement("button");
+    const booking = appointmentData[time];
+    const row = document.createElement("div");
+    const timeCell = document.createElement("span");
+    const bookingCell = document.createElement("span");
+    const cancelButton = document.createElement("button");
+    console.log("booking",booking)
+    timeCell.textContent = time;
+    bookingCell.textContent = booking.name;
+    cancelButton.textContent = "Cancel";
 
-      timeCell.textContent = time;
-      bookingCell.textContent = booking;
-      cancelButton.textContent = "Cancel";
+    row.classList.add("appointment-row");
+    timeCell.classList.add("appointment-time");
+    cancelButton.classList.add("cancel-button");
 
-      row.classList.add("appointment-row");
-      timeCell.classList.add("appointment-time");
-      cancelButton.classList.add("cancel-button");
+    cancelButton.addEventListener("click", () => {
+      const email = profileData.email;
+      cancelAppointment(email, time, booking);
+    });
 
-      cancelButton.addEventListener("click", () => {
-          cancelAppointment(time);
-      });
-
-      row.appendChild(timeCell);
-      row.appendChild(bookingCell);
-      row.appendChild(cancelButton);
-      appointmentTable.appendChild(row);
+    row.appendChild(timeCell);
+    row.appendChild(bookingCell);
+    row.appendChild(cancelButton);
+    appointmentTable.appendChild(row);
   }
 }
 
 // Function to handle the cancellation of the appointment
-function cancelAppointment(time) {
-  // Add your cancellation logic here
-  console.log(`Appointment at ${time} canceled!`);
+async function cancelAppointment(email, time, booking) {
+  console.log("....................booking")
+  console.log(email, time, booking)
+  // booking = JSON.stringify(booking)
+  // console.log(booking)
+  // You can use the email, time, and booking values to perform the cancellation logic
+  // For example, you can make an API call to cancel the appointment and update the profile
+
+  // Make the API call or perform cancellation logic using the provided information
+  // Replace the API_URL with your actual API endpoint for cancelling appointments
+  const API_URL = `http://localhost:8080/client/cancle?email=${email}&&lawyer_id=${booking._id}&&time=${time}`;
+
+  
+
+ await fetch(API_URL)
+    .then(response => response.json())
+    .then(async data => {
+      // Handle the response from the API
+      console.log("Appointment cancellation response:", data);
+      alert(data)
+     await fetch(`http://localhost:8080/client/user?email=${email}`)
+  .then(response => response.json())
+  .then(data =>{console.log("data",data),updateProfile(data)})
+  .catch(error => console.error('Error:', error))
+      // Perform any necessary actions based on the response
+      // Update the profile or display a success message, etc.
+    })
+    .catch(error => {
+      // Handle any errors that occur during the API request
+      console.error("Error cancelling appointment:", error);
+    });
+
+
+
+    var speciality = document.querySelector('select[name="speciality"]').value;
+    //         // Construct the fetch URL with query parameters
+    //   var url = ''  + '&speciality=' + encodeURIComponent(speciality);
+    
+    // Perform the fetch request
+    console.log(speciality)
+  await  fetch(`http://localhost:8080/client/get?specialization=${speciality}`)
+    .then(function(response) {
+    return response.json();
+    })
+    .then(function(data) {
+    // Handle the response data and update the search results
+    updateSearchResults(data);
+    })
+    .catch(function(error) {
+    console.log('An error occurred:', error);
+    });
+
+    location.reload()
+    
 }
 
+var Email=localStorage.getItem("user")
+var user = JSON.parse(Email)
+var clientEmail = user.email
+// updateProfile(user)
+// console.log("profiledata",user)
 // Make the fetch request to retrieve profile data
-fetch('http://localhost:8080/client/user?email=ssinghsolanki686@gmail.com')
+fetch(`http://localhost:8080/client/user?email=${clientEmail}`)
   .then(response => response.json())
-  .then(data => updateProfile(data))
+  .then(data =>{console.log("data",data),updateProfile(data)})
   .catch(error => console.error('Error:', error));
 
 
@@ -134,6 +191,7 @@ return function() {
     for (var key in sloats) {
       if (sloats.hasOwnProperty(key) && sloats[key] !== "booked") {
         var button = document.createElement('button');
+        button.classList = "innerb"
         button.innerText = key;
         button.addEventListener('click', createSlotClickListener(key, sloats[key],r));
         p6.appendChild(button);
@@ -148,7 +206,9 @@ function createSlotClickListener(slot, slotValue,r) {
 return async function() {
   console.log(slot, slotValue,r);
 
-  var clientEmail='ssinghsolanki686@gmail.com'
+  var Email=localStorage.getItem("user")
+  var user = JSON.parse(Email)
+  var clientEmail = user.email
   var lawyerId=r._id;
   var bookingsloat = slot
 await fetch(`http://localhost:8080/client/book/?clientEmail=${clientEmail}&&lawyerId=${lawyerId}&&bookingsloat=${bookingsloat}`)
@@ -156,7 +216,40 @@ await fetch(`http://localhost:8080/client/book/?clientEmail=${clientEmail}&&lawy
   .then(data=>{alert(data)})
   .catch(err=>alert(err.message))
   localStorage.setItem("id", JSON.stringify(r))
-  window.location.href = "payment.html"
+
+
+
+  await fetch(`http://localhost:8080/client/user?email=${clientEmail}`)
+  .then(response => response.json())
+  .then(data =>{console.log("data",data),updateProfile(data)})
+  .catch(error => console.error('Error:', error)) 
+
+
+  var speciality = document.querySelector('select[name="speciality"]').value;
+//         // Construct the fetch URL with query parameters
+//   var url = ''  + '&speciality=' + encodeURIComponent(speciality);
+
+// Perform the fetch request
+console.log(speciality)
+fetch(`http://localhost:8080/client/get?specialization=${speciality}`)
+.then(function(response) {
+return response.json();
+})
+.then(function(data) {
+// Handle the response data and update the search results
+updateSearchResults(data);
+})
+.catch(function(error) {
+console.log('An error occurred:', error);
+});
+
+
+
+
+   window.location.href = "p.html"
+
+
+  
 };
 
 // 
