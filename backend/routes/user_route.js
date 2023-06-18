@@ -11,6 +11,7 @@ const userrouter = express.Router()
 const cors = require('cors');
 const { usermodel } = require('../models/usermodel');
 const { outhuser } = require('../models/outh');
+const { LawyerModel } = require('../models/lawyerModel');
 userrouter.use(cors());
 
 // Set up your GoogleStrategy here
@@ -187,15 +188,23 @@ userrouter.post('/signup', async (req, res) => {
 userrouter.post("/login", async (req, res) => {
   let { email, password } = req.body
   let user = await usermodel.findOne({ email })
-  if (user == null) res.json("NotFound")
-  else if (user.status == false) res.json("Confirm your Account")
-  else {
-    let hash = bcrypt.compareSync(password, user.password)
-    if (hash) {
-      res.json(user)
-    } else {
-      res.json("Incorrect Password")
+  // let lawyer = await LawyerModel.contact.findOne({ email })
+  let lawyer = await LawyerModel.findOne({ 'contact.email': email}).exec();
+console.log(user,lawyer,email,password);
+  if (user == null && lawyer == null) res.json("NotFound")
+  else if (user) {
+    if (user.status == false) res.json("Confirm your Account")
+    else {
+      let hash = bcrypt.compareSync(password, user.password)
+      if (hash) {
+        res.json(user)
+      } else {
+        res.json("Incorrect Password")
+      }
     }
+  }else if(lawyer){
+    if(lawyer.contact.password==password)res.json(lawyer)
+    else res.json("Incorrect Password")
   }
 })
 
