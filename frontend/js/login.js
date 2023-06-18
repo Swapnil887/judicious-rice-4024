@@ -17,7 +17,7 @@ if(userData!=null){
     )
     setTimeout(() => {
         window.location.href="./login.html"
-    }, 1000);
+    }, 2000);
 }
 
 b1.addEventListener("click", () => {
@@ -65,7 +65,9 @@ b1.addEventListener("click", () => {
                     'Logging Successful!',
                     'success'
                 )
-                window.location.href = "./index.html"
+                setTimeout(() => {
+                    window.location.href = "./index.html"
+                }, 1500);
             }
         })
 })
