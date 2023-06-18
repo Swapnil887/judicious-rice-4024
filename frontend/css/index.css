@@ -471,3 +471,93 @@ margin: 5% auto;
         font-weight: bold;
     }
       
+
+
+    /* addding */
+
+
+    body {
+        font-family: Arial, sans-serif;
+      }
+      
+      .container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        /* background-color: #4CAF50; */
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      .search-form {
+        text-align: center;
+        margin-bottom: 20px;
+        /* background-color: aqua; */
+        width: 60%;
+        margin: auto;
+      }
+      
+      .search-form input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      
+      .search-form select {
+        padding: 10px;
+        font-size: 16px;
+      }
+      
+      .search-form input[type="submit"] {
+        padding: 10px 20px;
+        font-size: 16px;
+        
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      
+      #search{
+        margin: 20px;
+        background-color:rgb(16, 16, 36);
+      }
+      .search-results {
+        margin-top: 20px;
+        background-color:rgb(16, 16, 36);
+        width: auto;
+        margin: auto;
+      }
+      #LI{
+        display: flex;
+      }
+  
+      #div2{
+        margin-left: auto;
+        /* border: 1px solid green; */
+      }
+  
+      .search-results ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .search-results li {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      
+      .search-results li h2 {
+        margin: 0;
+      }
+      
+      .search-results li p {
+        margin: 0;
+      }
+  
+  
+    
