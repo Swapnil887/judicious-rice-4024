@@ -17,10 +17,15 @@
   <link rel="stylesheet" href="./auto.css">
       <style>
         #maincontainer{
-            margin-left: 90px;
+            /* margin-left: 90px; */
         }#imgoflogin{
             padding-right: 20px;
             width: 70px;
+            cursor: pointer;
+        }#login_img_btn{
+          border: none;
+          background-color: #262626;
+          height: 20px;
         }
       </style>
 </head>
@@ -70,38 +75,24 @@
             </li>
             <li>
               <a href="#">Legal Services</a>
-              <ul class="nav-dropdown">
-                <li>
-                  <a href="#">HTML</a>
-                </li>
-                <li>
-                  <a href="#">CSS</a>
-                </li>
-                <li>
-                  <a href="#">JavaScript</a>
-                </li>
-              </ul>
+              
             </li>
             <li>
-              <a href="#!">Graphic Design</a>
+              <a id="username" href="#!"></a>
+              </li>
                     <ul class="nav-dropdown">
                 <li>
-                  <a href="#">Photoshop</a>
+                  <a href="#">LOG OUT</a>
                 </li>
-                <li>
-                  <a href="#">Illustrator</a>
-                </li>
-                <li>
-                  <a href="#">InDesign</a>
-                </li>
+                
               </ul>
             </li>
-            <!-- <li>
-              <a id="about" href="#!">SEO</a>
-            </li> -->
-            <li>
-               <img id="imgoflogin" src="https://assets.vakilsearch.com/live-images/user-blue.svg" alt="">
-            </li>
+             <li> 
+              <!-- <a id="about" href="#!">SEO</a> -->
+            </li> 
+           <li>
+            <img id="imgoflogin" src="https://assets.vakilsearch.com/live-images/user-blue.svg" alt="">
+           </li>
           </ul>
       </div>
     </nav>
@@ -279,7 +270,7 @@
 
 </div>
 
-
+<a id="btn_for_login" href="">login</a>
 
 <h1 class="text-center common-title m-0 m-b-50 font-40 font-weight-semibold color1 lh-56">
   Hear what our users have to say
@@ -478,6 +469,7 @@
                 <button class="btn btn_2">Subscribe</button>
             </fieldset>
         </section>
+        
     </div>
     <div class="flex">
         <section class="flex-content padding_1x">
@@ -505,12 +497,46 @@
   // Show the popup after a delay
   setTimeout(function() {
     popupOverlay.style.display = "flex";
-  }, 1000); // Adjust the delay (in milliseconds) as needed
+  }, 6000); // Adjust the delay (in milliseconds) as needed
 
   // Close the popup when the close button is clicked
   closeBtn.addEventListener("click", function() {
     popupOverlay.style.display = "none";
   });
 });
+// let x="pujan sharma"
+// document.querySelector("#username").innerHTML=`${x}`
+let btn=document.querySelector("#imgoflogin");
+
+btn.addEventListener("click", () => {
+  window.location.href = "./login.html" 
+})
+// let x=localStorage.getItem("user")
+var x = JSON.parse(localStorage.getItem('user')); 
+let btn1=document.querySelector("#btn_for_login")
+// console.log(x.name)
+if(x){
+  document.querySelector("#username").innerHTML=x.name;
+  // window.location.href=""
+}else{
+  let btn2=document.createElement("a");
+  btn2.innerText="Login"
+  btn2.href="./login.html"
+  document.querySelector("#username").appendChild(btn2);
+  // window.location.href="./login.html"
+}
+let usename=document.querySelector("#username");
+let visibledata=document.querySelector(".nav-dropdown")
+visibledata.style.display="none"
+  usename.addEventListener("click", ()=>{
+    visibledata.style.display="block"
+    usename.addEventListener("click", ()=>{
+    visibledata.style.display="none"
+    usename.addEventListener("click", ()=>{
+    visibledata.style.display="block"
+  })
+  })
+})
 </script>
+
 
