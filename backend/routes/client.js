@@ -6,6 +6,7 @@ const { LawyerModel } = require("../models/lawyerModel");
 const { usermodel } = require("../models/usermodel");
 const { lawyerRoute } = require("./Lawyers");
 const { logger } = require("handlebars");
+const { outhuser } = require("../models/outh");
 // const { LawyerModel } = require("../models/lawyerModel");
 
 
@@ -16,7 +17,13 @@ clientRoute.get("/user", async (req, res) => {
   const { email } = req.query
   try {
     var data = await usermodel.findOne({ email })
-    res.json(data)
+    var x_data = await outhuser.findOne({email})
+    if(data){
+      res.json(data)
+    }else{
+      res.json(x_data)
+    }
+    
   } catch (error) {
     console.log(error)
     res.json("something went wrong while getting user profile")
@@ -76,7 +83,9 @@ clientRoute.get("/book", async (req, res) => {
     //for client data updation
     const l = await LawyerModel.findOne({ _id: lawyerId })
     const c = await usermodel.findOne({ email: clientEmail })
-    console.log(c, "c")
+    const o = await outhuser.findOne({ email: clientEmail })
+    if(c){
+      console.log(c, "c")
     console.log(l, "l")
     var obj = { ...c.appointment };
 
@@ -105,6 +114,38 @@ clientRoute.get("/book", async (req, res) => {
 
     console.log('bo')
     res.json("Booked")
+    }else{
+      console.log(0, "c")
+      console.log(l, "l")
+      var obj = { ...o.appointment };
+  
+      if (obj == undefined) {
+        var newObj = {}
+        newObj[bookingsloat] = l
+      } else {
+        obj[bookingsloat] = l
+        var newObj = { ...obj }
+      }
+  
+      // obj[bookingsloat] = l;
+  
+      console.log(obj)
+  
+      var updateClient = await outhuser.updateOne({ email: clientEmail }, { appointment: newObj })
+  
+      var arr = { ...l.sloats }
+      arr[bookingsloat] = "booked"
+  
+      console.log(arr)
+      const updateLawyer = await LawyerModel.updateOne({ _id: lawyerId }, { sloats: arr })
+      console.log(updateLawyer)
+  
+  
+  
+      console.log('bo')
+      res.json("Booked")
+    }
+    
   }
   catch (error) {
     console.log(error)
@@ -129,13 +170,27 @@ clientRoute.get("/cancle", async (req, res) => {
 
     await LawyerModel.updateOne({ _id: lawyer_id }, { sloats: booking_slot })
     var x = await usermodel.find({ email: email })
-    var user_appointment = { ...x[0].appointment }
+    var y = await outhuser.find({email:email})
+
+    if(x.length!=0){
+      var user_appointment = { ...x[0].appointment }
     console.log(user_appointment)
     delete user_appointment[time]
     console.log("ffffff", user_appointment)
     var y = await usermodel.updateOne({ email: email }, { appointment: user_appointment })
     console.log(y)
     res.json("appoinment cancled")
+    }
+    else{
+      var user_appointment = { ...y[0].appointment }
+    console.log(user_appointment)
+    delete user_appointment[time]
+    console.log("ffffff", user_appointment)
+    await outhuser.updateOne({ email: email }, { appointment: user_appointment })
+    
+    res.json("appoinment cancled")
+    }
+    
   } catch (error) {
     console.log(error)
     res.json("something went wrong in canciling")
@@ -143,34 +198,6 @@ clientRoute.get("/cancle", async (req, res) => {
   }
 })
 
-async function x(time, email, lawyer_id) {
-  try {
-
-
-    const f = await LawyerModel.findOne({ _id: lawyer_id })
-
-
-    var booking_slot = { ...f.sloats }
-    booking_slot[time] = "not booked"
-
-    // console.log(booking_slot)
-
-
-    // console.log(booking)
-
-    await LawyerModel.updateOne({ _id: booking._id }, { sloats: booking_slot })
-    var x = await usermodel.find({ email: email })
-    var user_appointment = { ...x[0].appointment }
-    console.log(user_appointment)
-    delete user_appointment[time]
-    console.log("ffffff", user_appointment)
-    var y = await usermodel.updateOne({ email: email }, { appointment: user_appointment })
-    console.log(y)
-
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 
 module.exports = { clientRoute }

@@ -9,14 +9,14 @@ const encodedData = urlParams.get('user');
 let userData = JSON.parse(decodeURIComponent(encodedData));
 
 // Access the user properties as needed
-if(userData!=null){
+if (userData != null) {
     Swal.fire(
         'Good job!',
         'Email Confirmed!',
         'success'
     )
     setTimeout(() => {
-        window.location.href="./login.html"
+        window.location.href = "./login.html"
     }, 2000);
 }
 
@@ -58,16 +58,30 @@ b1.addEventListener("click", () => {
                     confirmButtonText: 'Ok'
                 })
             } else {
-                localStorage.clear()
-                localStorage.setItem("user", JSON.stringify(res))
-                Swal.fire(
-                    'Good job!',
-                    'Logging Successful!',
-                    'success'
-                )
-                setTimeout(() => {
-                    window.location.href = "./index.html"
-                }, 1500);
+                if (res.role == "client") {
+                    localStorage.clear()
+                    localStorage.setItem("user", JSON.stringify(res))
+                    Swal.fire(
+                        'Good job!',
+                        'Logging Successful!',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        window.location.href = "./index.html"
+                    }, 1500);
+                } else {
+                    localStorage.clear()
+                    localStorage.setItem("user", JSON.stringify(res))
+                    Swal.fire(
+                        'Good job!',
+                        'Logging Successful!',
+                        'success'
+                    )
+                    setTimeout(() => {
+                        window.location.href = "./lawyer.html"
+                    }, 1500);
+                }
+
             }
         })
 })

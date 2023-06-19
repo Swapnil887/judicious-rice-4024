@@ -2,6 +2,12 @@
 <html>
 <head>
   <title>Lawyer Profile</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"
+        integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css"
+        integrity="sha256-7jUS+MWeqkFdmW9ozkZ7mPagz+QmMbsBlt+Q3MsE+FU=" crossorigin="anonymous">
+ 
   <style>
     
 
@@ -477,9 +483,13 @@ article {
 
   <script>
     // Add your JavaScript code here
+    var user = localStorage.getItem("user")
+    var Data = JSON.parse(user)
+    var id = Data._id;
+    console.log("id",id);
     document.addEventListener('DOMContentLoaded', () => {
       // Retrieve and display the lawyer's profile details
-      fetch('http://localhost:8080/client/get/648f0b82be00cb574072b358')
+      fetch(`http://localhost:8080/client/get/${id}`)
         .then(response => response.json())
         .then(data => {
           const profileElement = document.getElementById('profile');
@@ -504,12 +514,18 @@ article {
 
         console.log(startTime,endTime,duration)
         // Send the time slot data to the server for processing
-       await fetch(`http://localhost:8080/lawyer/update/648f0b82be00cb574072b358?startTime=${startTime}:00&&endTime=${endTime}:00&&slotDuration=${duration}`)
+       await fetch(`http://localhost:8080/lawyer/update/${id}?startTime=${startTime}:00&&endTime=${endTime}:00&&slotDuration=${duration}`)
           .then(response => response.json())
           .then(data => {
             // Handle the response from the server
 
             console.log(data);
+
+            Swal.fire(
+                        'Good job!',
+                        'New Slots Created ! ',
+                        'success'
+                    )
             // Refresh or update the page to reflect the new time slot
           })
           .catch(error => console.error(error));

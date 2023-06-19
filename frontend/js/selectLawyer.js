@@ -1,6 +1,12 @@
 function updateProfile(profileData) {
-  document.getElementById("name").textContent = profileData.name;
-  document.getElementById("email").textContent = profileData.email;
+  
+  if(profileData.name){
+    document.getElementById("name").textContent = profileData.name;
+  document.getElementById("email").textContent = profileData.email
+  }else{
+    document.getElementById("email").textContent = profileData.email
+  }
+  ;
 
   const appointmentData = profileData.appointment;
   const appointmentTable = document.getElementById("appointment");
@@ -53,7 +59,11 @@ async function cancelAppointment(email, time, booking) {
     .then(async data => {
       // Handle the response from the API
       console.log("Appointment cancellation response:", data);
-      alert(data)
+      Swal.fire(
+        'Good job!',
+        'Appointment cancel ! ',
+        'success'
+    )
      await fetch(`http://localhost:8080/client/user?email=${email}`)
   .then(response => response.json())
   .then(data =>{console.log("data",data),updateProfile(data)})
@@ -186,7 +196,14 @@ return function() {
 
   if (sloats == undefined) {
     p6.innerText = 'Not available';
-    alert("Sloats not available")
+    // alert("Sloats not available")
+
+    Swal.fire(
+      'Good job!',
+      'Slots not available!',
+      'success'
+  )
+    
   } else {
     for (var key in sloats) {
       if (sloats.hasOwnProperty(key) && sloats[key] !== "booked") {
@@ -213,8 +230,17 @@ return async function() {
   var bookingsloat = slot
 await fetch(`http://localhost:8080/client/book/?clientEmail=${clientEmail}&&lawyerId=${lawyerId}&&bookingsloat=${bookingsloat}`)
   .then(res=>res.json())
-  .then(data=>{alert(data)})
-  .catch(err=>alert(err.message))
+  .then(data=>{Swal.fire(
+    'Good job!',
+    'Booked !',
+    'success'
+)})
+  .catch((err)=> {Swal.fire({
+    title: 'Error!',
+    text: 'Something went wrong',
+    icon: 'error',
+    confirmButtonText: 'Ok'
+})})
   localStorage.setItem("id", JSON.stringify(r))
 
 

@@ -42,9 +42,3 @@ lawyerRoute.get("/update/:id",async (req,res)=>{
 module.exports = {lawyerRoute}
 
 
-async function fun(){
-    var x = await LawyerModel.find()
-    console.log(x)
-}
-
-fun()

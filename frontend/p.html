@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lawyer Payment Page</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"
+  integrity="sha256-2Dbg51yxfa7qZ8CSKqsNxHtph8UHdgbzxXF9ANtyJHo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css"
+  integrity="sha256-7jUS+MWeqkFdmW9ozkZ7mPagz+QmMbsBlt+Q3MsE+FU=" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/payment.css">
 </head>
 
@@ -194,7 +198,11 @@
 </html>
 <script>
   document.getElementById("payButton").addEventListener("click",()=>{
-    alert("payment successfull !")
+    Swal.fire(
+                        'Good job!',
+                        'Payment successful ! ',
+                        'success'
+                    )
     window.location = "./index.html"
   })
 </script>
