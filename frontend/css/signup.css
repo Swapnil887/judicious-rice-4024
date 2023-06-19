@@ -367,4 +367,6 @@ body{
 #height p,#weight p{
     font-family: sans-serif;
     font-weight: bold;
+}#h3{
+    cursor: pointer;
 }
