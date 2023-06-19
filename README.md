@@ -134,4 +134,4 @@ We appreciate your valuable contributions to the project!
 
 ## License
 
-The Lawyer Booking Appointment System is open source and distributed under the [MIT License](LICENSE). Feel free to modify and use the system according to your needs.
+The Lawyer Booking Appointment System is open source and distributed under the [MIT License](LICENSE) Feel free to modify and use the system according to your needs.
