@@ -14,48 +14,41 @@
 </head>
 
 <body>
-    <div style="display: flex;justify-content: center;align-items: center;">
-        <div style="width: 80%;padding-left: 10%;">
-            <div style="padding-right: 20%;">
-                <h2 id="account" style="color: red;cursor: pointer;">Create Account</h2>
-            </div>
-            <div>
-                <a class="google-sign-in" href="http://localhost:8080/user/auth/google"><span class="icon"></span><span
-                        class="buttonText">Sign in
-                        with Google</span></a>
-
-            </div>
-            <div class="f">
-                <form>
-                    <label>Username</label>
-                    <input type="text" id="username" placeholder="Username" size="48" required>
-                    <br>
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="Email Address" size="48" required>
-                    <br>
-                    <label>Password</label>
-                    <input type="password" id="password" placeholder="Password" size="48" required>
-                    <br>
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirm" placeholder="Confirm Password" size="48" required>
-
-                </form>
-
-            </div>
-            <div id="lastt" style="padding-right: 25%;">
-                <button id="last">
-                    <h3 id="h3" style="margin: 0px;">Sign Up</h3>
-                </button>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h2 id="account">Create Account</h2>
 
         </div>
-        <div>
-            <img style="width: 50%;padding-left: 20%;"
-                src="https://static.hsappstatic.net/signup-ui-lego/static-1.8137/images/landing-page-headshot/landing-page-headshot@3x.png"
-                alt="">
+        <div class="google-section">
+        </div>
+        <div class="form-section">
+            <form>
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Username" required>
+                <br>
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email Address" required>
+                <br>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password" required>
+                <br>
+                <label for="confirm">Confirm Password</label>
+                <input type="password" id="confirm" placeholder="Confirm Password" required>
+            </form>
+            <br>
+            <button id="last">
+                <h3 id="h3">Sign Up</h3>
+            </button>
+            <div style="text-align: center;">
+                <br>
+                <a class="google-sign-in" href="http://localhost:8080/user/auth/google"><span class="buttonText">Sign in
+                        with Google</span></a>
+                <br>
+                <br>
+                <a href="./login.html">Already have an account?</a>
+            </div>
         </div>
     </div>
-
 </body>
 <script>
     let email = document.getElementById('email')
@@ -79,7 +72,7 @@
                 confirmButtonText: 'Ok'
             })
 
-        }else if(username.value==''&&password.value==''&&email.value==''){
+        } else if (username.value == '' && password.value == '' && email.value == '') {
             Swal.fire({
                 title: 'Error!',
                 text: 'Fill All The Required Fields',
