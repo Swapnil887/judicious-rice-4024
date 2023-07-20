@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <div id="loader-overlay">
+        <div id="loader"></div>
+    </div>
     <div class="container">
         <div class="header">
             <h2 id="account">Create Account</h2>
@@ -51,6 +54,8 @@
     </div>
 </body>
 <script>
+    const loaderOverlay = document.getElementById("loader-overlay");
+    const container = document.getElementById("container");
     let email = document.getElementById('email')
     let password = document.getElementById('password')
     let confirm = document.getElementById('confirm')
@@ -95,8 +100,7 @@
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(data)
-            })
-                .then(res => res.json())
+            }).then(res => res.json())
                 .then((res) => {
                     console.log(res);
                     if (res === "exists") {
@@ -121,8 +125,22 @@
                             'success'
                         )
                     }
+                }).catch((error) => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Fetching Error',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                    console.log(error);
                 })
-                .catch(err => console.log(err))
+                .finally(() => {
+                    loaderOverlay.style.display = "none";
+                    container.style.opacity = "1";
+                })
+
+            loaderOverlay.style.display = "flex";
+            container.style.opacity = "0.8";
         }
     });
 </script>

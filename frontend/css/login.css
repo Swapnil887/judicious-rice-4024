@@ -1,4 +1,40 @@
-/* Mobile-first styles */
+/* Your existing styles */
+
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+#loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #006064;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Add the styles for the loader and background here */
+
+
 body {
     margin: 0;
     padding: 0;
@@ -37,12 +73,13 @@ body {
 #input1,
 #input2 {
     width: 100%;
-    height: 30px;
-    padding: 5px;
-    margin-bottom: 5px;
+    height: 20px;
+    padding: 10px;
+    margin: 10px 0;
     border-radius: 5px;
-    border: 0.5pt solid black;
-    font-size: 13px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    outline: none;
 }
 
 .cen {
@@ -102,10 +139,6 @@ body {
     padding-top: 30px;
 }
 
-/* Hover effect for login button */
-#button:hover {
-    opacity: 0.9;
-}
 
 a {
     color: #0039a6;

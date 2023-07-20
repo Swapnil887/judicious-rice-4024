@@ -1,3 +1,7 @@
+const loaderOverlay = document.getElementById("loader-overlay");
+const container = document.getElementById("container");
+
+
 let b1 = document.getElementById("b1")
 let email = document.getElementById("input1")
 let password = document.getElementById("input2")
@@ -84,4 +88,19 @@ b1.addEventListener("click", () => {
 
             }
         })
+        .catch((error) => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Fetching Error',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+            console.log(error);
+        })
+        .finally(() => {
+            loaderOverlay.style.display = "none";
+            container.style.opacity = "1";
+        })
+    loaderOverlay.style.display = "flex";
+    container.style.opacity = "0.8";
 })

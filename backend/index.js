@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 const cors=require('cors');
 const { clientRoute } = require("./routes/client");
-const { lawyerRoute } = require("./routes/Lawyers");
+const { lawyerRoute } = require("./routes/lawyers");
 app.use(cors())
 app.get('/',(req,res)=>{
     res.send('welcome')
